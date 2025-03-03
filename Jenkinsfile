@@ -9,6 +9,7 @@
 //         }
 //     }
 // }
+
 pipeline {
     agent any
 
@@ -23,10 +24,10 @@ pipeline {
             }
         }
 
-        stage('Build Docker image') {
+        stage('Pull Docker image') {
             steps {
                 script {
-                    sh 'docker build -t vishvajitkanase/web-app28 .'
+                    sh 'docker pull vishvajitkanase/web-app28'
                 }
             }
         }
