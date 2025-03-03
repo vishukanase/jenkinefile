@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-                echo 'Hello World changes'
+                echo 'Hello World changes anr made me'
             }
         }
     }
