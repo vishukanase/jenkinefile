@@ -27,7 +27,7 @@ pipeline {
         stage('Pull Docker image') {
             steps {
                 script {
-                    sh 'docker pull vishvajitkanase/web-app28'
+                    sh 'docker pull vishvajitkanase/web-app28:latest'
                 }
             }
         }
