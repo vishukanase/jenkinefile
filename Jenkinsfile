@@ -9,7 +9,6 @@
 //         }
 //     }
 // }
-
 pipeline {
     agent any
 
@@ -27,7 +26,7 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 script {
-                    docker.build(DOCKER_IMAGE)
+                    sh 'docker build -t vishvajitkanase/web-app28 .'
                 }
             }
         }
@@ -35,10 +34,8 @@ pipeline {
         stage('Test Docker image') {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).inside {
-                        sh 'echo "Running tests..."'
-                        // Add your test commands here
-                    }
+                    sh 'docker run --rm vishvajitkanase/web-app28 echo "Running tests..."'
+                    // Add your test commands here
                 }
             }
         }
@@ -46,11 +43,9 @@ pipeline {
         stage('Deploy Docker image') {
             steps {
                 script {
-                    sh """
-                        docker stop web_app || true
-                        docker rm web_app || true
-                        docker run -d --name web_app -p 8080:80 $DOCKER_IMAGE
-                    """
+                    sh 'docker stop web_app || true'
+                    sh 'docker rm web_app || true'
+                    sh 'docker run -d --name web_app -p 8080:80 vishvajitkanase/web-app28'
                 }
             }
         }
